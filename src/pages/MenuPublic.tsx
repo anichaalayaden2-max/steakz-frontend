@@ -8,33 +8,33 @@ const categoryEmoji: Record<string, string> = {
 
 const itemImages: Record<string, string> = {
   // STEAKS
-  "Ribeye Steak": "https://images.unsplash.com/photo-1558030006-450675393462?w=400&q=80",
-  "Sirloin Steak": "https://images.unsplash.com/photo-1600891964092-4316c288032e?w=400&q=80",
-  "Fillet Steak": "https://images.unsplash.com/photo-1607116667981-ff148a5bfe2a?w=400&q=80",
-  "T-Bone Steak": "https://images.unsplash.com/photo-1544025162-d76694265947?w=400&q=80",
+  "Ribeye Steak": "https://images.unsplash.com/photo-1558030006-450675393462?w=800&q=90",
+  "Sirloin Steak": "https://images.unsplash.com/photo-1600891964092-4316c288032e?w=800&q=90",
+  "Fillet Steak": "https://images.unsplash.com/photo-1607116667981-ff148a5bfe2a?w=800&q=90",
+  "T-Bone Steak": "https://images.unsplash.com/photo-1544025162-d76694265947?w=800&q=90",
   // BURGERS
-  "Classic Burger": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&q=80",
-  "BBQ Burger": "https://images.unsplash.com/photo-1561758033-d89a9ad46330?w=400&q=80",
+  "Classic Burger": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=800&q=90",
+  "BBQ Burger": "https://images.unsplash.com/photo-1561758033-d89a9ad46330?w=800&q=90",
   // SIDES
-  "Fries": "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=400&q=80",
-  "Onion Rings": "https://images.unsplash.com/photo-1639024471283-03518883512d?w=400&q=80",
-  "Salad": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&q=80",
+  "Fries": "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=800&q=90",
+  "Onion Rings": "https://images.unsplash.com/photo-1639024471283-03518883512d?w=800&q=90",
+  "Salad": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800&q=90",
   // DRINKS
-  "Coke": "https://images.unsplash.com/photo-1554866585-cd94860890b7?w=400&q=80",
-  "Water": "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400&q=80",
-  "Beer": "https://images.unsplash.com/photo-1608270586620-248524c67de9?w=400&q=80",
-  "Wine": "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=400&q=80",
+  "Coke": "https://images.unsplash.com/photo-1554866585-cd94860890b7?w=800&q=90",
+  "Water": "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=800&q=90",
+  "Beer": "https://images.unsplash.com/photo-1608270586620-248524c67de9?w=800&q=90",
+  "Wine": "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=800&q=90",
   // DESSERTS
-  "Cheesecake": "https://images.unsplash.com/photo-1567171466295-4afa63d45416?w=400&q=80",
-  "Chocolate Lava": "https://images.unsplash.com/photo-1624353365286-3f8d62daad51?w=400&q=80",
+  "Cheesecake": "https://images.unsplash.com/photo-1567171466295-4afa63d45416?w=800&q=90",
+  "Chocolate Lava": "https://images.unsplash.com/photo-1624353365286-3f8d62daad51?w=800&q=90",
 };
 
 const categoryImages: Record<string, string> = {
-  STEAK: "https://images.unsplash.com/photo-1558030006-450675393462?w=400&q=80",
-  BURGER: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&q=80",
-  SIDE: "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=400&q=80",
-  DRINK: "https://images.unsplash.com/photo-1554866585-cd94860890b7?w=400&q=80",
-  DESSERT: "https://images.unsplash.com/photo-1567171466295-4afa63d45416?w=400&q=80",
+  STEAK: "https://images.unsplash.com/photo-1558030006-450675393462?w=800&q=90",
+  BURGER: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=800&q=90",
+  SIDE: "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=800&q=90",
+  DRINK: "https://images.unsplash.com/photo-1554866585-cd94860890b7?w=800&q=90",
+  DESSERT: "https://images.unsplash.com/photo-1567171466295-4afa63d45416?w=800&q=90",
 };
 
 const getImage = (item: any) =>
@@ -127,7 +127,7 @@ function MenuPublic() {
                 overflow: "hidden", border: "1px solid #e8e0d0",
                 boxShadow: "0 4px 20px rgba(0,0,0,0.06)",
               }}>
-                <div style={{ position: "relative", height: "220px", overflow: "hidden" }}>
+                <div style={{ position: "relative", height: "240px", overflow: "hidden" }}>
                   <img
                     src={getImage(item)}
                     alt={item.name}
