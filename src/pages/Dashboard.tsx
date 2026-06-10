@@ -14,7 +14,7 @@ function Dashboard() {
 
   const fetchDashboard = async () => {
     try {
-      const endpoint = role === "HQ_MANAGER" ? "/dashboard" : "/dashboard/branch";
+     const endpoint = role === "ADMIN" || role === "HQ_MANAGER" ? "/dashboard" : "/dashboard/branch";
       const response = await api.get(endpoint, {
         headers: { Authorization: `Bearer ${token}` },
       });
