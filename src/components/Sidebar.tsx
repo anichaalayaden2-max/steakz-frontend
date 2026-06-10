@@ -33,7 +33,6 @@ function Sidebar() {
         fontWeight: isActive(to) ? "700" : "400",
         background: isActive(to) ? "rgba(212,175,55,0.08)" : "transparent",
         borderLeft: isActive(to) ? "2px solid #D4AF37" : "2px solid transparent",
-        transition: "all 0.2s",
       }}
     >
       {label}
@@ -49,12 +48,16 @@ function Sidebar() {
     CASHIER: "Cashier",
   };
 
+  const branchDisplay = () => {
+    if (role === "ADMIN") return "All Branches";
+    if (role === "HQ_MANAGER") return "Headquarters";
+    return branchName || "";
+  };
+
   return (
     <div style={{
-      width: "250px",
-      minHeight: "100vh",
-      background: "#1c1007",
-      display: "flex",
+      width: "250px", minHeight: "100vh",
+      background: "#1c1007", display: "flex",
       flexDirection: "column",
       borderRight: "1px solid rgba(212,175,55,0.15)",
       flexShrink: 0,
@@ -76,19 +79,16 @@ function Sidebar() {
           width: "40px", height: "40px", borderRadius: "50%",
           background: "rgba(212,175,55,0.15)", border: "1px solid rgba(212,175,55,0.3)",
           display: "flex", alignItems: "center", justifyContent: "center",
-          marginBottom: "10px",
-          color: "#D4AF37", fontSize: "18px",
+          marginBottom: "10px", color: "#D4AF37", fontSize: "18px",
         }}>
           {role === "ADMIN" ? "👑" : role === "HQ_MANAGER" ? "📊" : role === "BRANCH_MANAGER" ? "🏢" : role === "WAITER" ? "🍽️" : role === "CHEF" ? "👨‍🍳" : "💳"}
         </div>
         <p style={{ color: "white", fontSize: "13px", margin: "0 0 3px", fontFamily: "Arial, sans-serif", fontWeight: "600" }}>
           {roleLabel[role || ""] || role}
         </p>
-        {branchName && (
-          <p style={{ color: "#a8896c", fontSize: "11px", margin: 0, fontFamily: "Arial, sans-serif", letterSpacing: "1px" }}>
-            {branchName}
-          </p>
-        )}
+        <p style={{ color: "#a8896c", fontSize: "11px", margin: 0, fontFamily: "Arial, sans-serif", letterSpacing: "1px" }}>
+          {branchDisplay()}
+        </p>
       </div>
 
       {/* NAV LINKS */}
@@ -164,18 +164,14 @@ function Sidebar() {
 
       {/* LOGOUT */}
       <div style={{ padding: "20px 25px", borderTop: "1px solid rgba(212,175,55,0.15)" }}>
-        <button
-          onClick={logout}
-          style={{
-            width: "100%", padding: "12px",
-            background: "transparent",
-            color: "#ef4444",
-            border: "1px solid rgba(239,68,68,0.3)",
-            borderRadius: "4px", cursor: "pointer",
-            fontSize: "11px", letterSpacing: "2px",
-            fontFamily: "Arial, sans-serif", fontWeight: "600",
-          }}
-        >
+        <button onClick={logout} style={{
+          width: "100%", padding: "12px",
+          background: "transparent", color: "#ef4444",
+          border: "1px solid rgba(239,68,68,0.3)",
+          borderRadius: "4px", cursor: "pointer",
+          fontSize: "11px", letterSpacing: "2px",
+          fontFamily: "Arial, sans-serif", fontWeight: "600",
+        }}>
           LOGOUT
         </button>
       </div>
