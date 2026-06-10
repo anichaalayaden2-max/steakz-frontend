@@ -9,6 +9,7 @@ interface Reservation {
 }
 
 function Reservations() {
+  const role = localStorage.getItem("role");
   const branchId = localStorage.getItem("branchId");
   const token = localStorage.getItem("token");
   const headers = { Authorization: `Bearer ${token}` };
@@ -26,7 +27,7 @@ function Reservations() {
 
   const fetchReservations = async () => {
     try {
-      const params = branchId ? { branchId } : {};
+      const params = role === "ADMIN" ? {} : branchId ? { branchId } : {};
       const response = await api.get("/reservations", { headers, params });
       setReservations(response.data);
     } catch (error) { console.error(error); }
@@ -139,38 +140,46 @@ function Reservations() {
             </tr>
           </thead>
           <tbody>
-            {reservations.map((r) => (
-              <tr key={r.id} style={{ borderBottom: "1px solid #f0ece6" }}>
-                <td style={td}>{r.customerName}</td>
-                <td style={td}>{r.phone}</td>
-                <td style={td}>{r.guests}</td>
-                <td style={td}>
-                  {r.Table ? (
-                    <span style={{ background: "#1c1007", color: "#D4AF37", padding: "3px 10px", borderRadius: "2px", fontSize: "11px", fontFamily: "Arial, sans-serif", letterSpacing: "1px" }}>
-                      {r.Table.tableNumber}
-                    </span>
-                  ) : (
-                    <span style={{ color: "#dc2626", fontSize: "12px", fontFamily: "Arial, sans-serif" }}>No table</span>
-                  )}
-                </td>
-                <td style={td}>{new Date(r.reservationDate).toLocaleString("en-GB", { day: "2-digit", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" })}</td>
-                <td style={td}>
-                  <span style={{ background: statusBg[r.status] || "#374151", color: "white", padding: "3px 10px", borderRadius: "2px", fontSize: "10px", fontFamily: "Arial, sans-serif", letterSpacing: "1px", fontWeight: "600" }}>
-                    {r.status}
-                  </span>
-                </td>
-                <td style={{ ...td, display: "flex", gap: "6px" }}>
-                  {r.status === "PENDING" && (
-                    <>
-                      <button onClick={() => updateStatus(r.id, "CONFIRMED")} style={actionBtn("#14532d")}>✓</button>
-                      <button onClick={() => updateStatus(r.id, "CANCELLED")} style={actionBtn("#92400e")}>✕</button>
-                    </>
-                  )}
-                  <button onClick={() => editReservation(r)} style={actionBtn("#1e3a8a")}>Edit</button>
-                  <button onClick={() => deleteReservation(r.id)} style={actionBtn("#7f1d1d")}>Del</button>
+            {reservations.length === 0 ? (
+              <tr>
+                <td colSpan={7} style={{ padding: "40px", textAlign: "center", color: "#a8896c", fontFamily: "Arial, sans-serif", fontSize: "13px" }}>
+                  No reservations found
                 </td>
               </tr>
-            ))}
+            ) : (
+              reservations.map((r) => (
+                <tr key={r.id} style={{ borderBottom: "1px solid #f0ece6" }}>
+                  <td style={td}>{r.customerName}</td>
+                  <td style={td}>{r.phone}</td>
+                  <td style={td}>{r.guests}</td>
+                  <td style={td}>
+                    {r.Table ? (
+                      <span style={{ background: "#1c1007", color: "#D4AF37", padding: "3px 10px", borderRadius: "2px", fontSize: "11px", fontFamily: "Arial, sans-serif", letterSpacing: "1px" }}>
+                        {r.Table.tableNumber}
+                      </span>
+                    ) : (
+                      <span style={{ color: "#dc2626", fontSize: "12px", fontFamily: "Arial, sans-serif" }}>No table</span>
+                    )}
+                  </td>
+                  <td style={td}>{new Date(r.reservationDate).toLocaleString("en-GB", { day: "2-digit", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" })}</td>
+                  <td style={td}>
+                    <span style={{ background: statusBg[r.status] || "#374151", color: "white", padding: "3px 10px", borderRadius: "2px", fontSize: "10px", fontFamily: "Arial, sans-serif", letterSpacing: "1px", fontWeight: "600" }}>
+                      {r.status}
+                    </span>
+                  </td>
+                  <td style={{ ...td, display: "flex", gap: "6px" }}>
+                    {r.status === "PENDING" && (
+                      <>
+                        <button onClick={() => updateStatus(r.id, "CONFIRMED")} style={actionBtn("#14532d")}>✓</button>
+                        <button onClick={() => updateStatus(r.id, "CANCELLED")} style={actionBtn("#92400e")}>✕</button>
+                      </>
+                    )}
+                    <button onClick={() => editReservation(r)} style={actionBtn("#1e3a8a")}>Edit</button>
+                    <button onClick={() => deleteReservation(r.id)} style={actionBtn("#7f1d1d")}>Del</button>
+                  </td>
+                </tr>
+              ))
+            )}
           </tbody>
         </table>
       </div>
